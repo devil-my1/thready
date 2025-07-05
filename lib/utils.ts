@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
+import z from "zod"
 
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs))
@@ -35,5 +36,20 @@ export function formatThreadCount(count: number): string {
 		const threadCount = count.toString().padStart(2, "0")
 		const threadWord = count === 1 ? "Thread" : "Threads"
 		return `${threadCount} ${threadWord}`
+	}
+}
+
+// ERROR HANDLER
+export const handleError = (error: unknown) => {
+	if (error instanceof Error) {
+		// This is a native JavaScript error (e.g., TypeError, RangeError)
+		console.log(error.message)
+	} else if (typeof error === "string") {
+		// This is a string error message
+		console.log(error)
+	} else {
+		// This is an unknown type of error
+		console.log(error)
+		throw new Error(`Unknown error: ${JSON.stringify(error)}`)
 	}
 }

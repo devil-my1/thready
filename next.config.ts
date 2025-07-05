@@ -1,6 +1,11 @@
 import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
+	experimental: {
+		serverActions: {
+			bodySizeLimit: "4mb"
+		}
+	},
 	images: {
 		remotePatterns: [
 			{
@@ -18,6 +23,13 @@ const nextConfig: NextConfig = {
 			{
 				protocol: "https",
 				hostname: "placehold.co"
+			},
+			{
+				hostname: "utfs.io",
+				protocol: "https"
+			},
+			{
+				hostname: "k2far3z952.ufs.sh"
 			}
 		]
 	}

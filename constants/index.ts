@@ -1,42 +1,44 @@
-export const navLinks = [
+export const sidebarLinks = [
 	{
-		label: "Home",
+		imgURL: "/assets/home.svg",
 		route: "/",
-		icon: "/assets/icons/home.svg"
+		label: "Home"
 	},
 	{
-		label: "Image Restore",
-		route: "/transformations/add/restore",
-		icon: "/assets/icons/image.svg"
+		imgURL: "/assets/search.svg",
+		route: "/search",
+		label: "Search"
 	},
 	{
-		label: "Generative Fill",
-		route: "/transformations/add/fill",
-		icon: "/assets/icons/stars.svg"
+		imgURL: "/assets/heart.svg",
+		route: "/activity",
+		label: "Activity"
 	},
 	{
-		label: "Object Remove",
-		route: "/transformations/add/remove",
-		icon: "/assets/icons/scan.svg"
+		imgURL: "/assets/create.svg",
+		route: "/create-thread",
+		label: "Create Thread"
 	},
 	{
-		label: "Object Recolor",
-		route: "/transformations/add/recolor",
-		icon: "/assets/icons/filter.svg"
+		imgURL: "/assets/community.svg",
+		route: "/communities",
+		label: "Communities"
 	},
 	{
-		label: "Background Remove",
-		route: "/transformations/add/removeBackground",
-		icon: "/assets/icons/camera.svg"
-	},
-	{
-		label: "Profile",
+		imgURL: "/assets/user.svg",
 		route: "/profile",
-		icon: "/assets/icons/profile.svg"
-	},
-	{
-		label: "Buy Credits",
-		route: "/credits",
-		icon: "/assets/icons/bag.svg"
+		label: "Profile"
 	}
+]
+
+export const profileTabs = [
+	{ value: "threads", label: "Threads", icon: "/assets/reply.svg" },
+	{ value: "replies", label: "Replies", icon: "/assets/members.svg" },
+	{ value: "tagged", label: "Tagged", icon: "/assets/tag.svg" }
+]
+
+export const communityTabs = [
+	{ value: "threads", label: "Threads", icon: "/assets/reply.svg" },
+	{ value: "members", label: "Members", icon: "/assets/members.svg" },
+	{ value: "requests", label: "Requests", icon: "/assets/request.svg" }
 ]

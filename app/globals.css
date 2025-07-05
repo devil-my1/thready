@@ -126,7 +126,7 @@
 
 	/* Activity */
 	.activity-card {
-		@apply flex items-center gap-2 rounded-md bg-dark-2 px-7 py-4;
+		@apply flex items-center justify-between gap-2 rounded-md bg-dark-2 px-7 py-4 hover:bg-dark-3 hover:scale-105  duration-500 transition-all ease-in-out;
 	}
 
 	/* No Result */
@@ -146,6 +146,10 @@
 	/* thread card  */
 	.thread-card_bar {
 		@apply relative mt-2 w-0.5 grow rounded-full bg-neutral-800;
+	}
+
+	.action-icon_item {
+		@apply cursor-pointer object-contain hover:invert md:hover:scale-110 md:transition-transform  duration-200;
 	}
 
 	/* User card */
@@ -236,6 +240,10 @@
 	.cl-organizationPreview
 	.cl-organizationPreviewTextContainer {
 	@apply max-sm:hidden;
+}
+
+.cl-avatarImageActionsUpload {
+	@apply text-light-1;
 }
 
 /* Shadcn Component Styles */
