@@ -2,8 +2,6 @@ import Image from "next/image"
 import React from "react"
 
 const ProfileHeader = ({
-	accountId,
-	authUserId,
 	bio,
 	createdAt,
 	image,

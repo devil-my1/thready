@@ -2,7 +2,7 @@ import UserCard from "@/components/UserCard"
 import { getAllUsers, getUserById } from "@/lib/actions/user.actions"
 import { currentUser } from "@clerk/nextjs/server"
 import { redirect } from "next/navigation"
-import React, { use } from "react"
+import React from "react"
 
 const SearchPage = async () => {
 	const user = await currentUser()

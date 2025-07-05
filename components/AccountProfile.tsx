@@ -9,7 +9,6 @@ import { userValidationSchema } from "@/lib/validations/user"
 import { Textarea } from "./ui/textarea"
 import { Input } from "./ui/input"
 import { Button } from "./ui/button"
-import { isBase64Image } from "@/lib/utils"
 import { UploadButton } from "@/lib/uploadthing"
 import { usePathname, useRouter } from "next/navigation"
 import { toast } from "sonner"
@@ -34,8 +33,8 @@ const AccountProfile = ({ user, btnTitle }: AccountProfileProps) => {
 	const onSubmit = async (data: z.infer<typeof userValidationSchema>) => {
 		await updateUser(
 			{
-				name: data.name,
-				username: data.username,
+				name: data.name || "",
+				username: data.username ? data.username.toLowerCase() : "",
 				clerkId: user.clerkId,
 				bio: data.bio,
 				image: data.image

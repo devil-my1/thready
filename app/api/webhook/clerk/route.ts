@@ -59,7 +59,7 @@ export const POST = async (request: Request) => {
 		return NextResponse.json({ message: err }, { status: 400 })
 	}
 
-	const eventType: EventType = evnt?.type!
+	const eventType: EventType = evnt?.type!!
 
 	// Listen organization creation event
 	if (eventType === "organization.created") {

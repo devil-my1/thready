@@ -12,7 +12,6 @@ import { usePathname, useRouter } from "next/navigation"
 import { toast } from "sonner"
 import { threadValidationSchema } from "@/lib/validations/thread"
 import { createThread } from "@/lib/actions/thready.actions"
-import { ObjectId } from "mongoose"
 
 const PostThready = ({ userId }: { userId: string }) => {
 	const router = useRouter()
