@@ -5,6 +5,7 @@ import { currentUser } from "@clerk/nextjs/server"
 import { redirect } from "next/navigation"
 import React from "react"
 import Comment from "@/components/Comment"
+import { IPopulatedThreadChild } from "@/types/mongo"
 
 const ThreadDetailPage = async ({ params }: SearchParamProps) => {
 	// const { id } = useParams<{ id: string }>()
@@ -29,7 +30,7 @@ const ThreadDetailPage = async ({ params }: SearchParamProps) => {
 			<div>
 				<ThreadyCard
 					id={thread?._id as string}
-					parrentId={thread.parentId!!}
+					parrentId={thread.parentId!! || null}
 					author={thread.author}
 					currentUser={user?.id}
 					comments={thread.children}
@@ -49,15 +50,15 @@ const ThreadDetailPage = async ({ params }: SearchParamProps) => {
 
 			<div className='mt-10'>
 				{thread.children &&
-					thread?.children.map((childItem: any) => (
+					thread?.children.map((childItem: IPopulatedThreadChild) => (
 						<ThreadyCard
 							key={childItem._id}
 							id={childItem._id}
 							currentUser={user?.id}
-							parrentId={childItem.parentId}
+							parrentId={childItem.parentId!! || null}
 							text={childItem.text}
 							author={childItem.author}
-							community={childItem.community}
+							community={null}
 							createdAt={childItem.createdAt}
 							comments={childItem.children}
 							isComment

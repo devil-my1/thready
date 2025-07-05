@@ -20,7 +20,7 @@ const HomePage = async () => {
 							<ThreadyCard
 								key={thread?._id as string}
 								id={thread?._id as string}
-								parrentId={thread.parentId!!}
+								parrentId={thread.parentId!! || null}
 								author={thread.author}
 								currentUser={user?.id}
 								comments={thread.children}

@@ -7,7 +7,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import React from "react"
 
-const LeftSideBar = ({ currentUserId }: { currentUserId: string }) => {
+const LeftSideBar = ({ currentUserId }: { currentUserId: string | null }) => {
 	const pathname = usePathname()
 
 	return (
