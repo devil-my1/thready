@@ -38,12 +38,9 @@ const ActivityPage = async () => {
 											/>
 										</div>
 										<p className='text-light-2 text-small-regular'>
-											<Link
-												href={`/profile/${item.author.clerkId}`}
-												className='mr-1 text-primary-500 hover:underline'
-											>
+											<span className='mr-1 text-primary-500'>
 												{item.author.name}
-											</Link>{" "}
+											</span>{" "}
 											replied to your thready
 										</p>
 									</div>

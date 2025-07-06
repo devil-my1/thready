@@ -48,8 +48,6 @@ export const POST = async (request: Request) => {
 	// After adding the endpoint, you'll see the secret on the right side.
 	const wh = new Webhook(process.env.NEXT_CLERK_WEBHOOK_SECRET || "")
 
-	console.log("Received payload:", payload)
-
 	let evnt: Event | null = null
 
 	try {

@@ -19,6 +19,9 @@ const ProfilePage = async ({ params }: SearchParamProps) => {
 
 	if (!userInfo?.onboarded) redirect("/onboarding")
 
+	const userThreads =
+		userInfo?.threads.filter(thread => thread.communityId == null) || []
+
 	return (
 		<section>
 			<ProfileHeader
@@ -29,6 +32,7 @@ const ProfilePage = async ({ params }: SearchParamProps) => {
 				image={userInfo.image}
 				bio={userInfo.bio}
 				createdAt={userInfo.createdAt}
+				type='User'
 			/>
 
 			<div className='mt-9'>
@@ -52,9 +56,9 @@ const ProfilePage = async ({ params }: SearchParamProps) => {
 								/>
 								<p className='max-sm:hidden'>{tab.label}</p>
 
-								{tab.value === "threads" && userInfo?.threads.length > 0 && (
+								{tab.value === "threads" && userThreads.length > 0 && (
 									<p className='ml-1 rounded-sm bg-light-4 px-2 py-1 !text-tiny-medium text-light-2'>
-										{userInfo?.threads.length}
+										{userThreads?.length}
 									</p>
 								)}
 							</TabsTrigger>

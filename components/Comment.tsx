@@ -3,7 +3,7 @@ import { createComment } from "@/lib/actions/thready.actions"
 import { commentValidationSchema } from "@/lib/validations/thread"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { usePathname } from "next/navigation"
-import React from "react"
+import React, { useState } from "react"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 import z from "zod"
@@ -19,6 +19,12 @@ const Comment = ({
 	currentUserId
 }: CommentProps) => {
 	const pathname = usePathname()
+	const [isPortrait, setIsPortrait] = useState(false)
+
+	const handleImageLoad = (event: React.SyntheticEvent<HTMLImageElement>) => {
+		const img = event.currentTarget
+		setIsPortrait(img.naturalHeight > img.naturalWidth)
+	}
 
 	const form = useForm<z.infer<typeof commentValidationSchema>>({
 		resolver: zodResolver(commentValidationSchema),
@@ -45,13 +51,16 @@ const Comment = ({
 				onSubmit={form.handleSubmit(onSubmit)}
 				className='comment-form'
 			>
-				<Image
-					src={currentUserImg || "/assets/profile.svg"}
-					alt='user profile'
-					width={48}
-					height={48}
-					className='rounded-full object-cover'
-				/>
+				<div className='relative w-14 h-12'>
+					<Image
+						src={currentUserImg || "/assets/profile.svg"}
+						alt='profile photo'
+						fill
+						className='cursor-pointer rounded-full object-cover border border-gray-700'
+						style={isPortrait ? { objectPosition: "center -8px" } : {}}
+						onLoad={handleImageLoad}
+					/>
+				</div>
 				<CustomFormField<typeof commentValidationSchema>
 					control={form.control}
 					name='comment'

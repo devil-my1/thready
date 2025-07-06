@@ -35,7 +35,7 @@ const ThreadDetailPage = async ({ params }: SearchParamProps) => {
 					currentUser={user?.id}
 					comments={thread.children}
 					text={thread.text}
-					community={null}
+					community={thread?.communityId || null}
 					createdAt={thread.createdAt!}
 				/>
 			</div>
@@ -58,7 +58,7 @@ const ThreadDetailPage = async ({ params }: SearchParamProps) => {
 							parrentId={childItem.parentId!! || null}
 							text={childItem.text}
 							author={childItem.author}
-							community={null}
+							community={childItem.communityId || null}
 							createdAt={childItem.createdAt}
 							comments={childItem.children}
 							isComment

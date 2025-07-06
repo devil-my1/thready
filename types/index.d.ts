@@ -27,12 +27,14 @@ declare interface ThreadyCreateParams {
 interface ThreadyCardProps {
 	id: string
 	author: {
+		_id?: string
 		clerkId: string
 		name: string
 		image?: string
 	}
 	currentUser: string
 	community: {
+		_id: string
 		id: string
 		name: string
 		image?: string
@@ -42,12 +44,16 @@ interface ThreadyCardProps {
 	parrentId: string | null
 	comments:
 		| {
+				_id: string
 				author: {
+					_id: string
+					name: string
 					image?: string
 				}
 		  }[]
 		| null
 	isComment?: boolean
+	showActions?: boolean
 }
 
 declare interface CommentProps {
@@ -63,6 +69,7 @@ declare interface ProfileHeaderProps {
 	username: string
 	image: string
 	bio: string
+	type: "User" | "Community"
 	createdAt: Date
 }
 

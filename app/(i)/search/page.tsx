@@ -1,10 +1,16 @@
+import Searchbar from "@/components/Searchbar"
 import UserCard from "@/components/UserCard"
 import { getAllUsers, getUserById } from "@/lib/actions/user.actions"
 import { currentUser } from "@clerk/nextjs/server"
 import { redirect } from "next/navigation"
 import React from "react"
 
-const SearchPage = async () => {
+const SearchPage = async ({
+	searchParams
+}: {
+	searchParams: { [key: string]: string | undefined }
+}) => {
+	const { page, q } = await searchParams
 	const user = await currentUser()
 	if (!user) redirect("/sign-in")
 
@@ -12,8 +18,8 @@ const SearchPage = async () => {
 
 	const result = await getAllUsers({
 		userId: user.id,
-		searchTerm: "",
-		pageNumber: 1,
+		searchTerm: q || "",
+		pageNumber: page ? +page : 1,
 		pageSize: 20,
 		sortBy: "desc"
 	})
@@ -22,6 +28,8 @@ const SearchPage = async () => {
 	return (
 		<section>
 			<h1 className='head-text'>Search</h1>
+
+			<Searchbar routeType='search' />
 
 			<div className='flex mt-14 flex-col gap-9'>
 				{result?.users.length === 0 ? (

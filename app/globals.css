@@ -229,6 +229,10 @@
 	.custom-scrollbar::-webkit-scrollbar-thumb:hover {
 		background: #7878a3;
 	}
+
+	.preserve-formatting {
+		@apply whitespace-pre-wrap;
+	}
 }
 
 /* Clerk Responsive fix */

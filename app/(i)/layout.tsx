@@ -5,7 +5,8 @@ import LeftSideBar from "@/components/LeftSideBar"
 import RightSideBar from "@/components/RightSideBar"
 import TopBar from "@/components/TopBar"
 import { useAuth } from "@clerk/nextjs"
-import { Loader } from "lucide-react"
+import Loader from "@/components/Loader"
+
 export default function MainLayout({
 	children
 }: Readonly<{

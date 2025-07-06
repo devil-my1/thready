@@ -7,11 +7,13 @@ import {
 	IUser,
 	IUpdateUserParams,
 	GetAllUsersResult,
-	IActivityReply
+	IActivityReply,
+	IPopulatedUserProfile
 } from "@/types/mongo"
 import { handleError } from "../utils"
 import { FilterQuery } from "mongoose"
 import Thready from "../models/thready.model"
+import { Community } from "../models/community.model"
 
 export const updateUser = async (
 	userData: IUpdateUserParams,
@@ -42,19 +44,24 @@ export const updateUser = async (
 
 export async function getUserById(
 	id: string
-): Promise<IUser | null | undefined> {
+): Promise<IPopulatedUserProfile | null> {
 	try {
 		await connectToDatabase()
 		const user = await User.findOne({ clerkId: id })
-		// 	.populate({
-		// 		path: 'communities',
-		// 		model: 'Community',
-		// })
+			.populate({
+				path: "communities",
+				model: Community
+			})
+			.populate({
+				path: "threads",
+				model: Thready
+			})
 		if (!user) return null
 
 		return JSON.parse(JSON.stringify(user))
 	} catch (error) {
 		handleError(error)
+		return null
 	}
 }
 

@@ -1,11 +1,17 @@
 import Loader from "@/components/Loader"
+import Pagination from "@/components/Pagination"
 import ThreadyCard from "@/components/ThreadyCard"
 import { getAllThreads } from "@/lib/actions/thready.actions"
 import { currentUser } from "@clerk/nextjs/server"
 
-const HomePage = async () => {
+const HomePage = async ({
+	searchParams
+}: {
+	searchParams: { [key: string]: string | undefined }
+}) => {
+	const { page } = await searchParams
 	const user = await currentUser()
-	const result = await getAllThreads()
+	const result = await getAllThreads(page ? +page : 1, 30)
 
 	if (!user) return <Loader />
 
@@ -25,7 +31,7 @@ const HomePage = async () => {
 								currentUser={user?.id}
 								comments={thread.children}
 								text={thread.text}
-								community={null}
+								community={thread.communityId || null}
 								createdAt={thread.createdAt!}
 							/>
 						))}
@@ -34,7 +40,11 @@ const HomePage = async () => {
 					<p>No thready found.</p>
 				)}
 
-				{result?.isNext && <button className='load-more'>Load More</button>}
+				<Pagination
+					path='/'
+					pageNumber={page ? +page : 1}
+					isNext={result?.isNext || false}
+				/>
 			</section>
 		</>
 	)

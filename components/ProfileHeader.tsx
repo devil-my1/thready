@@ -1,7 +1,12 @@
+"use client"
 import Image from "next/image"
-import React from "react"
+import Link from "next/link"
+import React, { useState } from "react"
 
 const ProfileHeader = ({
+	accountId,
+	authUserId,
+	type,
 	bio,
 	createdAt,
 	image,
@@ -13,6 +18,12 @@ const ProfileHeader = ({
 		month: "long",
 		day: "numeric"
 	})
+	const [isPortrait, setIsPortrait] = useState(false)
+
+	const handleImageLoad = (event: React.SyntheticEvent<HTMLImageElement>) => {
+		const img = event.currentTarget
+		setIsPortrait(img.naturalHeight > img.naturalWidth)
+	}
 
 	return (
 		<div className='flex w-full flex-col justify-start'>
@@ -23,7 +34,9 @@ const ProfileHeader = ({
 							src={image || "/assets/user.svg"}
 							alt='profile photo'
 							fill
-							className='rounded-full object-cover shadow-xl'
+							className='cursor-pointer rounded-full object-cover border border-gray-700'
+							style={isPortrait ? { objectPosition: "center -8px" } : {}}
+							onLoad={handleImageLoad}
 						/>
 					</div>
 					<div className='flex-1'>
@@ -33,7 +46,26 @@ const ProfileHeader = ({
 						<p className='text-base-medium text-gray-1'>@{username}</p>
 					</div>
 				</div>
-				<p className='text-gray-1 self-end'>{`Joined us from: ${date}`}</p>
+				<div className='flex flex-col gap-3'>
+					{accountId === authUserId && type !== "Community" && (
+						<Link
+							href='/profile/edit'
+							className=' flex-1'
+						>
+							<div className='flex cursor-pointer gap-3 rounded-lg bg-dark-3 px-4 py-2'>
+								<Image
+									src='/assets/edit.svg'
+									alt='logout'
+									width={16}
+									height={16}
+								/>
+
+								<p className='text-light-2 max-sm:hidden'>Edit</p>
+							</div>
+						</Link>
+					)}
+					<p className='text-gray-1 align-bottom'>{`Joined us from: ${date}`}</p>
+				</div>
 			</div>
 			<p className='mt-6 text-base-regular text-light-2'>{bio}</p>
 			<div className='mt-12 h-0.5 w-full bg-dark-3'></div>

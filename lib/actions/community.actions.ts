@@ -82,7 +82,7 @@ export async function fetchCommunityDetails(
 
 export async function fetchCommunityPosts(
 	id: string
-): Promise<ICommunityWithPosts | null | undefined> {
+): Promise<ICommunityWithPosts | null> {
 	try {
 		connectToDatabase()
 
@@ -101,7 +101,7 @@ export async function fetchCommunityPosts(
 					populate: {
 						path: "author",
 						model: User,
-						select: "image _id" // Select the "name" and "_id" fields from the "User" model
+						select: "image _id clerkId" // Select the "name" and "_id" fields from the "User" model
 					}
 				}
 			]
@@ -111,7 +111,7 @@ export async function fetchCommunityPosts(
 	} catch (error) {
 		// Handle any errors
 		console.error("Error fetching community posts:", error)
-		throw error
+		return null
 	}
 }
 

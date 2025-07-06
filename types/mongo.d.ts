@@ -49,46 +49,56 @@ declare interface IPopulatedUser {
 	image: string
 }
 
-// Populated thread with nested children (for getThreadById)
+// Populated thread with nested children (for getThreadById) - Updated to include community
 declare interface IGetThreadByIdResult {
 	_id: string
 	text: string
 	author: IPopulatedUser
-	communityId?: string | null
+	communityId?: IPopulatedCommunityBasic | null
 	parentId?: string
 	children: IPopulatedThreadChild[]
 	createdAt: Date
 }
 
-// Child thread with populated author (for nested comments)
+// Child thread with populated author (for nested comments) - Updated to include community
 declare interface IPopulatedThreadChild {
 	_id: string
 	text: string
 	author: IPopulatedUser
+	communityId?: IPopulatedCommunityBasic | null
 	parentId?: string
 	children: IPopulatedThreadGrandChild[]
 	createdAt: Date
 }
 
-// Grand child thread (nested comments)
+// Grand child thread (nested comments) - Updated to include community
 declare interface IPopulatedThreadGrandChild {
 	_id: string
 	text: string
 	author: IPopulatedUser
+	communityId?: IPopulatedCommunityBasic | null
 	parentId?: string
 	createdAt: Date
 }
 
-// Populated thread for general listing (like getAllThreads)
+// Populated community data for thread responses
+declare interface IPopulatedCommunityBasic {
+	_id: string
+	id: string
+	name: string
+	image: string
+}
+
+// Populated thread for general listing (like getAllThreads) - Updated to include community
 declare interface IPopulatedThread {
 	_id: string
 	text: string
 	author: IPopulatedUser
-	communityId?: string | null
+	communityId?: IPopulatedCommunityBasic | null
 	parentId?: string
 	children: {
 		_id: string
-		author: Pick<IPopulatedUser, "image">
+		author: Pick<IPopulatedUser, "_id" | "name" | "image">
 	}[]
 	createdAt: Date
 }
@@ -116,12 +126,12 @@ declare interface IUpdateUserParams {
 	onboarded?: boolean
 }
 
-// Populated user for profile pages
+// Populated user for profile pages - Updated to include community info
 declare interface IPopulatedUserProfile extends IPopulatedUser {
 	username: string
 	bio: string
 	threads: IPopulatedThread[]
-	communities: string[]
+	communities: IPopulatedCommunityBasic[]
 	onboarded: boolean
 	createdAt: Date
 	updatedAt: Date
@@ -228,13 +238,14 @@ declare interface ICommunityWithPosts {
 		author: {
 			name: string
 			image: string
-			id: string
+			clerkId: string
 		}
 		children: {
 			_id: string
 			author: {
 				image: string
 				_id: string
+				clerkId: string
 			}
 		}[]
 		createdAt: Date
