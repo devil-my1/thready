@@ -37,6 +37,8 @@ const ThreadDetailPage = async ({ params }: SearchParamProps) => {
 					text={thread.text}
 					community={thread?.communityId || null}
 					createdAt={thread.createdAt!}
+					likes={thread.likes?.map(like => like.clerkId) || []}
+					likesCount={thread.likesCount || 0}
 				/>
 			</div>
 

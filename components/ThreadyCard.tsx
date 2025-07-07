@@ -4,6 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import React, { useState } from "react"
 import DeleteThready from "./DeleteThready"
+import LikeButton from "./LikeButton"
 
 const ThreadyCard = ({
 	author,
@@ -15,7 +16,9 @@ const ThreadyCard = ({
 	currentUser,
 	showActions = false,
 	isComment,
-	createdAt
+	createdAt,
+	likes,
+	likesCount
 }: ThreadyCardProps) => {
 	const [isPortrait, setIsPortrait] = useState(false)
 
@@ -87,15 +90,19 @@ const ThreadyCard = ({
 									isComment
 							})}
 						>
-							<div className='flex gap-3.5'>
-								<Image
-									src='/assets/heart-gray.svg'
-									alt='heart'
-									width={24}
-									height={24}
-									className='action-icon_item'
+							<div className='action-icons-container'>
+								<LikeButton
+									threadId={id}
+									userId={currentUser}
+									initialLikesCount={likesCount || 0}
+									initialIsLiked={likes?.includes(currentUser) || false}
+									size='md'
+									showCount={true}
 								/>
-								<Link href={`/thread/${id}`}>
+								<Link
+									href={`/thread/${id}`}
+									className='flex items-center'
+								>
 									<div className='flex relative'>
 										<Image
 											src='/assets/reply.svg'
@@ -111,20 +118,24 @@ const ThreadyCard = ({
 										)}
 									</div>
 								</Link>
-								<Image
-									src='/assets/repost.svg'
-									alt='repost'
-									width={24}
-									height={24}
-									className='action-icon_item'
-								/>
-								<Image
-									src='/assets/share.svg'
-									alt='share'
-									width={24}
-									height={24}
-									className='action-icon_item'
-								/>
+								<button className='flex items-center'>
+									<Image
+										src='/assets/repost.svg'
+										alt='repost'
+										width={24}
+										height={24}
+										className='action-icon_item'
+									/>
+								</button>
+								<button className='flex items-center'>
+									<Image
+										src='/assets/share.svg'
+										alt='share'
+										width={24}
+										height={24}
+										className='action-icon_item'
+									/>
+								</button>
 							</div>
 							{isComment && comments && comments?.length > 0 && (
 								<Link href={`/thread/${id}`}>

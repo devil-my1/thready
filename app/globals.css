@@ -149,7 +149,16 @@
 	}
 
 	.action-icon_item {
-		@apply cursor-pointer object-contain hover:invert md:hover:scale-110 md:transition-transform  duration-200;
+		@apply cursor-pointer object-contain hover:invert md:hover:scale-110 md:transition-transform duration-200;
+	}
+
+	/* Action icons alignment fix */
+	.action-icons-container {
+		@apply flex items-center gap-3.5;
+	}
+
+	.action-icons-container > * {
+		@apply flex items-center justify-center min-w-6 min-h-6;
 	}
 
 	/* User card */
@@ -407,6 +416,90 @@
 }
 .react-datepicker-time__header {
 	@apply text-white;
+}
+
+/* =============================== */
+
+/* Like Button Styles */
+.filter-red {
+	filter: invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg)
+		brightness(104%) contrast(97%);
+}
+
+/* Heart animation */
+@keyframes heartBeat {
+	0% {
+		transform: scale(1);
+	}
+	14% {
+		transform: scale(1.3);
+	}
+	28% {
+		transform: scale(1);
+	}
+	42% {
+		transform: scale(1.1);
+	}
+	70% {
+		transform: scale(1);
+	}
+}
+
+.heart-animation {
+	animation: heartBeat 0.8s ease-in-out;
+}
+
+/* Enhanced heart animations for smoother UX */
+@keyframes heartPop {
+	0% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.25);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
+@keyframes heartPulse {
+	0%,
+	100% {
+		transform: scale(1);
+		opacity: 1;
+	}
+	50% {
+		transform: scale(1.05);
+		opacity: 0.8;
+	}
+}
+
+.heart-pop {
+	animation: heartPop 0.3s ease-out;
+}
+
+.heart-pulse {
+	animation: heartPulse 1.5s ease-in-out infinite;
+}
+
+/* Smooth transitions */
+.heart-smooth {
+	transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Pulse animation for loading */
+@keyframes pulse-subtle {
+	0%,
+	100% {
+		opacity: 0.8;
+	}
+	50% {
+		opacity: 0.4;
+	}
+}
+
+.pulse-subtle {
+	animation: pulse-subtle 1.5s ease-in-out infinite;
 }
 
 /* =============================== */

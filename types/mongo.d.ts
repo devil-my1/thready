@@ -9,6 +9,7 @@ declare interface IUser extends Document {
 	bio: string
 	image: string
 	threads: Types.ObjectId[]
+	likedThreads: Types.ObjectId[]
 	onboarded: boolean
 	communities: Types.ObjectId[]
 	createdAt: Date
@@ -23,6 +24,8 @@ declare interface IThready extends Document {
 	author: Types.ObjectId
 	communityId?: Types.ObjectId | null
 	children: Types.ObjectId[]
+	likes: Types.ObjectId[]
+	likesCount: number
 	createdAt: Date
 }
 
@@ -56,6 +59,8 @@ declare interface IGetThreadByIdResult {
 	author: IPopulatedUser
 	communityId?: IPopulatedCommunityBasic | null
 	parentId?: string
+	likes?: { _id: string; clerkId: string }[]
+	likesCount?: number
 	children: IPopulatedThreadChild[]
 	createdAt: Date
 }
@@ -96,6 +101,8 @@ declare interface IPopulatedThread {
 	author: IPopulatedUser
 	communityId?: IPopulatedCommunityBasic | null
 	parentId?: string
+	likes?: { _id: string; clerkId: string }[]
+	likesCount?: number
 	children: {
 		_id: string
 		author: Pick<IPopulatedUser, "_id" | "name" | "image">

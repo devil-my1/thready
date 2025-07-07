@@ -42,6 +42,8 @@ interface ThreadyCardProps {
 	text: string
 	createdAt: Date
 	parrentId: string | null
+	likes?: string[]
+	likesCount?: number
 	comments:
 		| {
 				_id: string

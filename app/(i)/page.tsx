@@ -33,6 +33,8 @@ const HomePage = async ({
 								text={thread.text}
 								community={thread.communityId || null}
 								createdAt={thread.createdAt!}
+								likes={thread.likes?.map((like: any) => like.clerkId) || []}
+								likesCount={thread.likesCount || 0}
 							/>
 						))}
 					</>

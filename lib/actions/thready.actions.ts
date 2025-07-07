@@ -94,6 +94,11 @@ export const getThreadById = async (
 				select: "_id id name image"
 			})
 			.populate({
+				path: "likes",
+				model: User,
+				select: "_id clerkId"
+			})
+			.populate({
 				path: "children",
 				populate: [
 					{
@@ -158,6 +163,11 @@ export const getThreadsByUserId = async (
 					select: "_id clerkId name image"
 				},
 				{
+					path: "likes",
+					model: User,
+					select: "_id clerkId"
+				},
+				{
 					path: "children",
 					model: Thready,
 					populate: {
@@ -204,6 +214,11 @@ export const getAllThreads = async (
 				path: "communityId",
 				model: Community,
 				select: "_id id name image"
+			})
+			.populate({
+				path: "likes",
+				model: User,
+				select: "_id clerkId"
 			})
 			.populate({
 				path: "children",

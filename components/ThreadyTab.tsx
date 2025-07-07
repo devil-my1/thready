@@ -82,6 +82,8 @@ const ThreadyTab = async ({
 										text={userThread.text}
 										community={userThread.communityId || null}
 										createdAt={userThread.createdAt}
+										likes={userThread.likes?.map(like => like.clerkId) || []}
+										likesCount={userThread.likesCount || 0}
 										showActions={isOwner}
 									/>
 								)
